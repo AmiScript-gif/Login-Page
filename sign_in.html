@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Login</h2>
+      <form action="#" method="POST">
+        <label for="email">Username</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Enter your email"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+        />
+
+        <button type="submit">Login</button>
+        <p>Don't have an account? <a href="sign_up.html">Create one</a></p>
+      </form>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if we are on the login page
+        // if (window.location.pathname.includes("sign_in.html")) {
+        const loginButton = document.querySelector("button[type='submit']");
+        const usernameInput = document.getElementById("username"); // You should change this to "name" in your HTML
+        const passwordInput = document.getElementById("password");
+
+        loginButton.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Retrieve stored user data
+          const storedUser = JSON.parse(localStorage.getItem("userData"));
+
+          if (!storedUser) {
+            alert("No account found. Please sign up first.");
+            window.location.href = "sign_up.html";
+            return;
+          }
+
+          if (
+            usernameInput.value === storedUser.username &&
+            passwordInput.value === storedUser.password
+          ) {
+            alert("Login Successful!");
+            window.location.href = "homepage.html";
+            // Redirect or perform other actions after login
+          } else {
+            alert("Invalid Username or Password. Please try again.");
+          }
+        });
+        // }
+      });
+    </script>
+  </body>
+</html>

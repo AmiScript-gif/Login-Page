@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Create Account</h2>
+      <form action="#" method="POST">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          placeholder="Enter your full name"
+          required
+        />
+
+        <label for="email">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+        />
+
+        <label for="password">Confirm Password</label>
+        <input
+          type="password"
+          id="confirm_password"
+          placeholder="reenter a password"
+          required
+        />
+        <p id="error" style="color: red"></p>
+        <button type="submit" id="submit">Sign Up</button>
+        <p>Already have an account? <a href="sign_in.html">Login here</a></p>
+      </form>
+    </div>
+    <script>
+      // Accessing form inputs and storing them in variables
+      const nameInput = document.getElementById("name");
+      const passwordInput = document.getElementById("password");
+      const confirm_passwordInput = document.getElementById("confirm_password");
+      const error = document.getElementById("error");
+      const submit = document.getElementById("submit");
+
+      // Event listener for form submission
+      submit.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        // Get the values inside the event listener
+        const nameValue = nameInput.value;
+        const passwordValue = passwordInput.value;
+        const confirm_passwordValue = confirm_passwordInput.value;
+
+        function createAccount() {
+          if (
+            nameValue === "" ||
+            passwordValue === "" ||
+            confirm_passwordValue === ""
+          ) {
+            error.innerHTML = "All fields are required";
+          } else if (passwordValue !== confirm_passwordValue) {
+            error.innerHTML =
+              "The Password and the Confirm Password must be the same";
+          } else {
+            // to collect your credentials into an object
+            const personal = { username: nameValue, password: passwordValue };
+
+            // Store data in localStorage
+            localStorage.setItem("userData", JSON.stringify(personal));
+
+            // Redirect to sign-in page
+            window.location.href = "sign_in.html";
+          }
+        }
+        createAccount();
+      });
+    </script>
+  </body>
+</html>
